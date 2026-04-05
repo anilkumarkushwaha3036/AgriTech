@@ -1,0 +1,23 @@
+// Color Palette (Earthy / Agriculture Motif)
+$color-primary: #2E7D32; // Deep leaf green
+$color-primary-light: #4CAF50;
+$color-secondary: #F57F17; // Wheat gold / Sun
+$color-background: #F9FAFB; // Off-white
+$color-surface: #FFFFFF;
+$color-text-dark: #1F2937;
+$color-text-light: #6B7280;
+$color-border: #E5E7EB;
+
+// Spacing & Border Radius
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+
+// Typography
+$font-stack: 'Inter', 'Roboto', sans-serif;
+
+// Responsive breakpoints
+$mobile-break: 768px;
+
+// Transitions
+$transition-fast: 0.2s ease-in-out;

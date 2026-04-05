@@ -1,0 +1,101 @@
+@import '../abstract/variables';
+
+.marketplace-page {
+  padding: 2rem 1rem;
+  
+  .marketplace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    h1 {
+      color: $color-primary;
+    }
+  }
+
+  .equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .equipment-card {
+    background: white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid $color-border;
+    transition: $transition-fast;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      border-color: $color-primary-light;
+    }
+
+    .eq-img-wrapper {
+      height: 200px;
+      background-color: #E5E7EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-text-light;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .eq-content {
+      padding: 1.5rem;
+      
+      .eq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+        
+        h3 {
+          font-size: 1.25rem;
+          color: $color-text-dark;
+          margin-bottom: 0.25rem;
+        }
+
+        .category-badge {
+          background-color: rgba(46,125,50,0.1);
+          color: $color-primary;
+          font-size: 0.75rem;
+          font-weight: 600;
+          padding: 0.25rem 0.5rem;
+          border-radius: 50px;
+          text-transform: capitalize;
+        }
+      }
+
+      .price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $color-secondary;
+        margin-bottom: 1rem;
+      }
+
+      .owner-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $color-text-light;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+      }
+    }
+  }
+}

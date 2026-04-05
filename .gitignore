@@ -1,0 +1,28 @@
+# Custom Ignores for Fullstack App
+node_modules/
+.env
+.env.local
+
+# Express Uploads
+Backend/uploads/
+
+# Build and Temp files
+dist/
+build/
+out/
+Frontend/dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Binaries / Executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# OS metadata
+.DS_Store
+Thumbs.db
