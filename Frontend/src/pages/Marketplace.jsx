@@ -13,7 +13,7 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchEquipment = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/equipment');
+        const { data } = await axios.get('/api/equipment');
         setEquipmentList(data);
       } catch (error) {
         console.error("Error fetching equipment:", error);
@@ -48,7 +48,7 @@ const Marketplace = () => {
             <div key={eq._id} className="equipment-card">
               <div className="eq-img-wrapper">
                 {eq.images && eq.images.length > 0 ? (
-                  <img src={`http://localhost:5000${eq.images[0]}`} alt={eq.name} />
+                  <img src={`${eq.images[0]}`} alt={eq.name} />
                 ) : (
                   <div>No Image Provided</div>
                 )}

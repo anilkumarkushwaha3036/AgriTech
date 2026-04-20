@@ -3,6 +3,14 @@ const multer = require('multer');
 const path = require('path');
 const router = express.Router();
 
+const fs = require('fs');
+
+// Ensure 'uploads' directory exists otherwise Multer will throw Error in Docker
+const uploadDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, 'uploads/');

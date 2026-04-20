@@ -8,7 +8,8 @@ AgriTech is a comprehensive full-stack web application designed to empower the a
 - **Labor Hiring:** Find and hire skilled agricultural workers for tasks on the farm.
 - **Secure Bookings & Payments:** Integrated with Razorpay for secure and easy financial transactions.
 - **User Authentication:** JWT-based robust authentication system ensuring secure access to your account and bookings.
-- **Image Upload:** Upload images directly for equipment listings to provide a rich visual experience.
+- **URL-based Image Integration:** Highly scalable, zero-storage feature passing image URLs directly to MongoDB Atlas.
+- **Unified Docker Deployment:** Streamlined multi-stage Docker build packaging frontend and backend together for rapid EC2 deployment.
 - **Responsive UI:** Modern, clean, and dynamic user interface built with React and Sass.
 
 ## 🛠 Tech Stack
@@ -18,53 +19,69 @@ AgriTech is a comprehensive full-stack web application designed to empower the a
 - **Routing:** React Router v7
 - **Styling:** Sass for custom aesthetics
 - **Icons:** Lucide React
-- **HTTP Client:** Axios
+- **HTTP Client:** Axios (All endpoints dynamically routed)
 
 **Backend:**
-- **Environment:** Node.js + Express.js
-- **Database:** MongoDB via Mongoose
+- **Environment:** Node.js + Express.js 5.x
+- **Database:** MongoDB Atlas (Cloud)
 - **Authentication:** JWT (JSON Web Tokens), bcryptjs
 - **Payments:** Razorpay
-- **File Uploads:** Multer
 
 ---
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-* You have installed **Node.js** (v18 or above is recommended)
-* You have a running instance of **MongoDB** (Local or MongoDB Atlas)
-* You have a **Razorpay** account for test credentials
+* You have installed **Node.js** (v18 or above) for local testing.
+* You have a **MongoDB Atlas Cloud Database** connection string.
+* You have a **Razorpay** account for test credentials.
+* **Docker** installed (for production deployment).
 
 ---
 
 ## ⚙️ Environment Configuration
 
-For the project to work, `.env` files are required in both `Backend` and `Frontend` directories. You will find `.env.example` files in each which outline the required keys.
+For the project to work, you must create `.env` files in both `Backend` and `Frontend` directories.
 
-**1. Backend configuration**  
-Create a `.env` file in the `/Backend` directory:
+**1. Backend configuration (`Backend/.env`)**  
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/agritech
+MONGODB_URI=mongodb+srv://<your_atlas_user>:<password>@cluster.mongodb.net/agritech
 JWT_SECRET=supersecretjwtkey123
 RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 ```
 
-**2. Frontend configuration**  
-Create a `.env` file in the `/Frontend` directory:
+**2. Frontend configuration (`Frontend/.env`)**  
+*(Note: Because of Docker bundling, use a relative path)*
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=/api
 ```
 
 ---
 
-## 📦 Installation & Setup
+## 🚀 Docker Deployment (Production)
 
-We have configured `concurrently` to make running the entire stack as simple as possible.
+The quickest and recommended way to run AgriTech is using the provided Multi-stage Docker build. This packages the React frontend inside the Express backend into one unified instance.
 
-**1. Clone the repository and navigate into the project root**
+**1. Build the unified Docker image:**
+```bash
+docker build -t agritech-app:v1 .
+```
+
+**2. Run the application (no volumes needed due to URL-based DB images):**
+```bash
+docker run -d -p 80:5000 agritech-app:v1
+```
+The app will now be available live on port 80 (HTTP).
+
+---
+
+## 📦 Local Development Setup
+
+If you wish to modify the code locally without Docker:
+
+**1. Clone the repository**
 ```bash
 git clone <repository_url>
 cd AgriTech
@@ -75,45 +92,14 @@ Run the custom script to automatically install both backend and frontend depende
 ```bash
 npm run install-all
 ```
-*(Alternatively, you can manually run `npm install` inside both the `/Backend` and `/Frontend` directories)*
 
 **3. Run the complete application**  
 Start both the Express backend and the Vite frontend simultaneously:
 ```bash
 npm start
 ```
-- The frontend will be available at `http://localhost:5173`
-- The backend will listen at `http://localhost:5000`
 
 ---
-
-## 📁 Repository Structure
-
-```
-AgriTech/
-├── Backend/
-│   ├── src/
-│   │   ├── config/        # Database and system configs
-│   │   ├── controllers/   # Route handlers
-│   │   ├── middlewares/   # Auth and file processing middlewares
-│   │   ├── models/        # Mongoose data schemas
-│   │   └── routes/        # Express route definitions
-│   ├── uploads/           # Directory for physical image uploads
-│   ├── .env               # Private backend variables
-│   └── index.js           # Express App Entry Point
-│
-├── Frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── context/       # React Context logic (e.g. AuthContext)
-│   │   ├── pages/         # High-level page components
-│   │   └── index.scss     # Global styling
-│   ├── .env               # Public Vite environment variables
-│   └── vite.config.js     # Vite configuration
-│
-└── package.json           # Root configuration for workspace commands
-```
 
 ## 📄 License
 This project is licensed under the ISC License.

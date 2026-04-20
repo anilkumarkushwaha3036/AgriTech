@@ -29,10 +29,10 @@ const BookingModal = ({ equipment, onClose }) => {
         endDate: new Date(new Date().setDate(new Date().getDate() + parseInt(days))),
         totalAmount
       };
-      const { data: newBooking } = await axios.post('http://localhost:5000/api/bookings', bookingData, config);
+      const { data: newBooking } = await axios.post('/api/bookings', bookingData, config);
 
       // 2. Generate Razorpay Order
-      const { data: orderData } = await axios.post('http://localhost:5000/api/payment/order', {
+      const { data: orderData } = await axios.post('/api/payment/order', {
         amount: totalAmount,
         bookingId: newBooking._id
       }, config);
@@ -48,7 +48,7 @@ const BookingModal = ({ equipment, onClose }) => {
         handler: async function (response) {
           try {
             // 4. Verify Payment with our Node server
-            await axios.post('http://localhost:5000/api/payment/verify', {
+            await axios.post('/api/payment/verify', {
               ...response,
               bookingId: newBooking._id
             }, config);

@@ -15,7 +15,7 @@ const AddEquipment = () => {
   });
   
   const [customCategory, setCustomCategory] = useState('');
-  const [imageFile, setImageFile] = useState(null);
+  const [imageUrlInput, setImageUrlInput] = useState('');
   const [error, setError] = useState('');
   const [uploading, setUploading] = useState(false);
 
@@ -32,8 +32,8 @@ const AddEquipment = () => {
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   
-  const handleImageChange = (e) => {
-    setImageFile(e.target.files[0]);
+  const handleImageUrlChange = (e) => {
+    setImageUrlInput(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -45,14 +45,9 @@ const AddEquipment = () => {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       let imageUrls = [];
       
-      // Upload image first
-      if (imageFile) {
-        const fileData = new FormData();
-        fileData.append('image', imageFile);
-        const { data: imgPath } = await axios.post('http://localhost:5000/api/upload', fileData, {
-           headers: { 'Content-Type': 'multipart/form-data' }
-        });
-        imageUrls.push(imgPath); // backend returns path string
+      // Push URL instead of uploading file
+      if (imageUrlInput.trim() !== '') {
+        imageUrls.push(imageUrlInput.trim());
       }
 
       // Determine final category (use custom if selected 'other')
@@ -62,7 +57,7 @@ const AddEquipment = () => {
       }
 
       // Save to database
-      await axios.post('http://localhost:5000/api/equipment', { 
+      await axios.post('/api/equipment', { 
         ...formData, 
         category: finalCategory, 
         images: imageUrls 
@@ -115,8 +110,8 @@ const AddEquipment = () => {
           )}
 
           <div className="form-group">
-            <label>Upload Machinery Image</label>
-            <input type="file" onChange={handleImageChange} accept="image/*" />
+            <label>Machinery Image URL</label>
+            <input type="url" placeholder="https://example.com/tractor.jpg" value={imageUrlInput} onChange={handleImageUrlChange} />
           </div>
 
           <div className="form-group">

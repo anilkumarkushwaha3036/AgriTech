@@ -10,7 +10,7 @@ const Labor = () => {
   useEffect(() => {
     const fetchLabor = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/labor');
+        const { data } = await axios.get('/api/labor');
         setLaborList(data);
       } catch (error) {
         console.error("Error fetching labor:", error);
