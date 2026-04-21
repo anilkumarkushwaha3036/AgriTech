@@ -1,5 +1,7 @@
 # AgriTech
 
+🚀 **Live Deployment (AWS EC2): [http://52.66.100.152/](http://52.66.100.152/)**
+
 AgriTech is a comprehensive full-stack web application designed to empower the agricultural community. It serves as a centralized platform for renting and leasing agricultural equipment, hiring skilled farm labor, and managing local marketplace bookings. Built with modern web technologies, the platform offers a seamless experience with integrated payment solutions, secure authentication, and a responsive interface.
 
 ## 🚀 Features
@@ -26,6 +28,10 @@ AgriTech is a comprehensive full-stack web application designed to empower the a
 - **Database:** MongoDB Atlas (Cloud)
 - **Authentication:** JWT (JSON Web Tokens), bcryptjs
 - **Payments:** Razorpay
+
+**DevOps & Deployment:**
+- **Hosting:** AWS EC2
+- **Containerization:** Docker
 
 ---
 
