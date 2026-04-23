@@ -1,111 +1,113 @@
-# AgriTech
+#  AgriTech — Agricultural Services & Marketplace Platform
 
-🚀 **Live Deployment (AWS EC2): [http://52.66.100.152/](http://52.66.100.152/)**
+> **Connecting farmers with equipment, labor, and local markets — all in one place.**
 
-AgriTech is a comprehensive full-stack web application designed to empower the agricultural community. It serves as a centralized platform for renting and leasing agricultural equipment, hiring skilled farm labor, and managing local marketplace bookings. Built with modern web technologies, the platform offers a seamless experience with integrated payment solutions, secure authentication, and a responsive interface.
+AgriTech is a full-stack web platform built to digitize and simplify agricultural operations. From renting heavy machinery to hiring skilled farm labor and managing marketplace bookings — AgriTech serves as a unified hub for the farming community.
 
-## 🚀 Features
-
-- **Equipment Marketplace:** Browse, list, and rent agricultural machinery seamlessly.
-- **Labor Hiring:** Find and hire skilled agricultural workers for tasks on the farm.
-- **Secure Bookings & Payments:** Integrated with Razorpay for secure and easy financial transactions.
-- **User Authentication:** JWT-based robust authentication system ensuring secure access to your account and bookings.
-- **URL-based Image Integration:** Highly scalable, zero-storage feature passing image URLs directly to MongoDB Atlas.
-- **Unified Docker Deployment:** Streamlined multi-stage Docker build packaging frontend and backend together for rapid EC2 deployment.
-- **Responsive UI:** Modern, clean, and dynamic user interface built with React and Sass.
-
-## 🛠 Tech Stack
-
-**Frontend:**
-- **Framework:** React 19 + Vite
-- **Routing:** React Router v7
-- **Styling:** Sass for custom aesthetics
-- **Icons:** Lucide React
-- **HTTP Client:** Axios (All endpoints dynamically routed)
-
-**Backend:**
-- **Environment:** Node.js + Express.js 5.x
-- **Database:** MongoDB Atlas (Cloud)
-- **Authentication:** JWT (JSON Web Tokens), bcryptjs
-- **Payments:** Razorpay
-
-**DevOps & Deployment:**
-- **Hosting:** AWS EC2
-- **Containerization:** Docker
+ **Live Deployment (AWS EC2):** [http://52.66.100.152/](http://52.66.100.152/)
 
 ---
 
-## 📋 Prerequisites
+##  The Core Problem
 
-Before you begin, ensure you have met the following requirements:
-* You have installed **Node.js** (v18 or above) for local testing.
-* You have a **MongoDB Atlas Cloud Database** connection string.
-* You have a **Razorpay** account for test credentials.
-* **Docker** installed (for production deployment).
+Farmers often rely on scattered, informal channels to find equipment rentals, hire labor, or sell produce locally. AgriTech centralizes these workflows into a single, secure, and mobile-friendly platform.
 
 ---
 
-## ⚙️ Environment Configuration
+##  Key Features
 
-For the project to work, you must create `.env` files in both `Backend` and `Frontend` directories.
+| Feature | Description |
+|---|---|
+|  Equipment Marketplace | Browse, list, and rent agricultural machinery seamlessly |
+|  Labor Hiring | Find and hire skilled farm workers for specific tasks |
+|  Secure Payments | Razorpay-integrated checkout for bookings and transactions |
+|  Auth System | JWT + bcryptjs based authentication with protected routes |
+|  URL-based Images | Zero-storage image handling — URLs stored directly in MongoDB Atlas |
+|  Unified Deployment | Multi-stage Docker build packaging frontend + backend into one image |
+|  Responsive UI | Clean, dynamic interface built with React and custom Sass styling |
 
-**1. Backend configuration (`Backend/.env`)**  
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, Vite, React Router v7, Sass, Lucide Icons, Axios |
+| Backend | Node.js, Express.js 5.x |
+| Database | MongoDB Atlas (Cloud) |
+| Auth | JWT, bcryptjs |
+| Payments | Razorpay |
+| DevOps | Docker (multi-stage), AWS EC2 |
+
+---
+
+##  Deployment — Docker (Recommended)
+
+The multi-stage Docker build packages the React frontend inside the Express backend into a single unified container.
+
+```bash
+# Build the image
+docker build -t agritech-app:v1 .
+
+# Run on port 80
+docker run -d -p 80:5000 agritech-app:v1
+```
+
+> App will be live on port 80. No volumes needed — images are URL-based.
+
+---
+
+##  Environment Setup
+
+Create `.env` files in both `Backend/` and `Frontend/` directories.
+
+**Backend (`Backend/.env`)**
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://<your_atlas_user>:<password>@cluster.mongodb.net/agritech
-JWT_SECRET=supersecretjwtkey123
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/agritech
+JWT_SECRET=your_jwt_secret
 RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 ```
 
-**2. Frontend configuration (`Frontend/.env`)**  
-*(Note: Because of Docker bundling, use a relative path)*
+**Frontend (`Frontend/.env`)**
 ```env
 VITE_API_URL=/api
 ```
 
 ---
 
-## 🚀 Docker Deployment (Production)
+##  Local Development
 
-The quickest and recommended way to run AgriTech is using the provided Multi-stage Docker build. This packages the React frontend inside the Express backend into one unified instance.
-
-**1. Build the unified Docker image:**
 ```bash
-docker build -t agritech-app:v1 .
-```
-
-**2. Run the application (no volumes needed due to URL-based DB images):**
-```bash
-docker run -d -p 80:5000 agritech-app:v1
-```
-The app will now be available live on port 80 (HTTP).
-
----
-
-## 📦 Local Development Setup
-
-If you wish to modify the code locally without Docker:
-
-**1. Clone the repository**
-```bash
+# Clone the repo
 git clone <repository_url>
 cd AgriTech
-```
 
-**2. Install all dependencies**  
-Run the custom script to automatically install both backend and frontend dependencies:
-```bash
+# Install all dependencies (frontend + backend)
 npm run install-all
-```
 
-**3. Run the complete application**  
-Start both the Express backend and the Vite frontend simultaneously:
-```bash
+# Start both servers simultaneously
 npm start
 ```
 
 ---
 
-## 📄 License
-This project is licensed under the ISC License.
+##  Future Roadmap
+
+- [ ] **Crop Advisory Module** — AI-based seasonal crop recommendations
+- [ ] **Multilingual Support** — Hindi and regional language UI
+- [ ] **Farmer Ratings & Reviews** — Trust system for labor and equipment providers
+- [ ] **SMS Notifications** — Booking confirmations via Twilio
+- [ ] **Mobile App** — React Native version for low-connectivity rural areas
+
+---
+
+##  Prerequisites
+
+- Node.js v18+
+- MongoDB Atlas connection string
+- Razorpay test credentials
+- Docker (for production deployment)
+
+---
