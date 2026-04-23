@@ -28,7 +28,7 @@ Farmers often rely on scattered, informal channels to find equipment rentals, hi
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |---|---|
