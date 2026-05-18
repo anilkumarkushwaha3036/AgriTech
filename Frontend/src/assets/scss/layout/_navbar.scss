@@ -21,22 +21,85 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: $color-primary;
+    text-decoration: none;
   }
 
-  .navbar-links {
+  .navbar-menu {
     display: none; // Hidden on mobile, bottom nav takes over
     
     @media (min-width: $mobile-break) {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2.5rem;
       font-weight: 600;
       color: $color-text-dark;
+      margin-left: 4rem; // Pushes links slightly next to logo
+      margin-right: auto; // Pushes login button to the far right!
       
-      a:not(.btn-primary) {
-        transition: color $transition-fast;
+      a {
+        transition: all $transition-fast;
+        position: relative;
+        padding: 0.5rem 0;
+        color: inherit;
+        text-decoration: none;
+        
         &:hover {
           color: $color-primary;
+        }
+        
+        &.nav-active {
+          color: $color-primary;
+          font-weight: 700;
+          
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: $color-primary;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-actions {
+    display: none; // Hidden on mobile
+    
+    @media (min-width: $mobile-break) {
+      display: block;
+    }
+
+    .btn-login {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.4rem;
+      background-color: white;
+      border: 2px solid $color-primary;
+      color: $color-primary !important;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: all $transition-fast;
+      box-shadow: 0 2px 5px rgba(46, 125, 50, 0.05);
+      text-decoration: none;
+
+      svg {
+        color: $color-primary;
+        transition: all $transition-fast;
+      }
+
+      &:hover {
+        background-color: $color-primary;
+        color: white !important;
+        box-shadow: 0 4px 10px rgba(46, 125, 50, 0.15);
+
+        svg {
+          color: white;
+          transform: scale(1.1);
         }
       }
     }

@@ -4,7 +4,7 @@
 
 AgriTech is a full-stack web platform built to digitize and simplify agricultural operations. From renting heavy machinery to hiring skilled farm labor and managing marketplace bookings — AgriTech serves as a unified hub for the farming community.
 
- **Live Deployment (AWS EC2):** [http://52.66.100.152/](http://52.66.100.152/)
+ **Live Deployment (AWS EC2):** [http://13.234.136.244/](http://13.234.136.244/)
 
 ---
 
@@ -20,11 +20,13 @@ Farmers often rely on scattered, informal channels to find equipment rentals, hi
 |---|---|
 |  Equipment Marketplace | Browse, list, and rent agricultural machinery seamlessly |
 |  Labor Hiring | Find and hire skilled farm workers for specific tasks |
+|  Dynamic Avatars | Colorful, role-specific agriculture avatars (e.g., Sowing, Irrigation, Digging) for laborers |
 |  Secure Payments | Razorpay-integrated checkout for bookings and transactions |
+|  Premium UI/UX | Clean navbar layout, hover effects, and Lenis smooth scrolling (with hidden scrollbars) |
+|  Optimized DB | Cloud-ready MongoDB Atlas configuration with optimized connection pooling & auto-healing |
 |  Auth System | JWT + bcryptjs based authentication with protected routes |
 |  URL-based Images | Zero-storage image handling — URLs stored directly in MongoDB Atlas |
 |  Unified Deployment | Multi-stage Docker build packaging frontend + backend into one image |
-|  Responsive UI | Clean, dynamic interface built with React and custom Sass styling |
 
 ---
 
@@ -71,8 +73,7 @@ RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 ```
 
 **Frontend (`Frontend/.env`)**
-```env
-VITE_API_URL=/api
+*(No .env needed for Frontend in production because it uses relative paths mapped to the Express backend natively).*
 ```
 
 ---

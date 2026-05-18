@@ -5,7 +5,7 @@ const Equipment = require('../models/Equipment');
 // @access  Public
 const getEquipment = async (req, res) => {
   try {
-    const equipment = await Equipment.find({ isAvailable: true }).populate('owner', 'name phone');
+    const equipment = await Equipment.find({ status: 'Available' }).populate('owner', 'name phone');
     res.json(equipment);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -33,7 +33,7 @@ const getEquipmentById = async (req, res) => {
 // @access  Private
 const createEquipment = async (req, res) => {
   try {
-    const { name, description, category, pricePerDay, images, specifications } = req.body;
+    const { name, description, category, pricePerDay, pricePerHour, images, specifications } = req.body;
 
     const equipment = new Equipment({
       owner: req.user._id,
@@ -41,8 +41,10 @@ const createEquipment = async (req, res) => {
       description,
       category,
       pricePerDay,
+      pricePerHour,
       images,
-      specifications
+      specifications,
+      status: 'Available'
     });
 
     const createdEquipment = await equipment.save();
@@ -64,4 +66,30 @@ const getMyEquipment = async (req, res) => {
   }
 };
 
-module.exports = { getEquipment, getEquipmentById, createEquipment, getMyEquipment };
+// @desc    Update equipment status
+// @route   PUT /api/equipment/:id/status
+// @access  Private
+const updateEquipmentStatus = async (req, res) => {
+  try {
+    const equipment = await Equipment.findById(req.params.id);
+    if (!equipment) {
+      return res.status(404).json({ message: 'Equipment not found' });
+    }
+    
+    // Check ownership
+    if (equipment.owner.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ message: 'Not authorized to update this equipment' });
+    }
+
+    if (req.body.status) {
+      equipment.status = req.body.status;
+    }
+    
+    const updatedEquipment = await equipment.save();
+    res.json(updatedEquipment);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getEquipment, getEquipmentById, createEquipment, getMyEquipment, updateEquipmentStatus };

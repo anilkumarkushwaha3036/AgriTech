@@ -1,7 +1,8 @@
 # Custom Ignores for Fullstack App
 node_modules/
 .env
-.env.local
+.env.*
+**/.env
 
 # Express Uploads
 Backend/uploads/

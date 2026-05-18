@@ -1,5 +1,6 @@
 import React from 'react';
-import { Search, Tractor, Users, Link as LinkIcon } from 'lucide-react';
+import { Search, Tractor, Users, PenTool, ArrowRight, ShieldCheck, Clock, Coins } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import '../assets/scss/layout/_home.scss';
 
 const Home = () => {
@@ -8,43 +9,77 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="container hero-content">
+          <span className="hero-badge">🌿 Empowering Indian Farmers</span>
           <h1>Welcome to <span className="highlight">AgriTech</span></h1>
-          <p>Rent tractors, hire labor, and maximize your farm's productivity today.</p>
+          <p>Rent heavy machinery, hire skilled labor, and share your farming tools seamlessly to maximize your yield.</p>
           
           <div className="search-bar">
             <Search color="#6B7280" />
-            <input type="text" placeholder="Search for Harvesters, Tractors..." />
-            <button className="btn-primary">Search</button>
+            <input type="text" placeholder="Search for Harvesters, Tractors, or Labour..." />
+            <Link to="/machinery" className="btn-primary" style={{textDecoration:'none', display:'flex', alignItems:'center', justifyContent:'center'}}>Search</Link>
           </div>
         </div>
       </section>
 
       {/* Quick Services */}
       <section className="services container">
-        <h2>Quick Services</h2>
+        <div className="section-header">
+          <h2>Our Core Services</h2>
+          <p>Everything you need for a successful farming season in one place.</p>
+        </div>
         <div className="service-grid">
-          <div className="service-card">
+          <Link to="/machinery" className="service-card link-card">
             <div className="icon-wrap bg-green">
               <Tractor size={40} color="#2E7D32" />
             </div>
-            <h3>Rent Machinery</h3>
-            <p>Book tractors & harvesters on demand</p>
-          </div>
+            <h3>Heavy Machinery</h3>
+            <p>Book tractors & harvesters on an hourly basis.</p>
+            <span className="card-action">Explore <ArrowRight size={16} /></span>
+          </Link>
           
-          <div className="service-card">
+          <Link to="/tools" className="service-card link-card">
+            <div className="icon-wrap bg-blue">
+              <PenTool size={40} color="#1D4ED8" />
+            </div>
+            <h3>Farm Tools</h3>
+            <p>Rent water pumps, pipes, and small equipment daily.</p>
+            <span className="card-action">Explore <ArrowRight size={16} /></span>
+          </Link>
+
+          <Link to="/labor" className="service-card link-card">
             <div className="icon-wrap bg-gold">
               <Users size={40} color="#F57F17" />
             </div>
             <h3>Hire Labor</h3>
-            <p>Find skilled hands for your next harvest</p>
-          </div>
+            <p>Find skilled hands instantly for your farm work.</p>
+            <span className="card-action">Explore <ArrowRight size={16} /></span>
+          </Link>
+        </div>
+      </section>
 
-          <div className="service-card">
-            <div className="icon-wrap bg-blue">
-              <LinkIcon size={40} color="#1D4ED8" />
+      {/* Why Choose Us */}
+      <section className="features-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Why Choose AgriTech?</h2>
+            <p>We bridge the gap between technology and traditional farming.</p>
+          </div>
+          <div className="features-grid">
+            <div className="feature-item feat-blue">
+              <ShieldCheck size={48} color="#1D4ED8" />
+              <h4>Verified Users</h4>
+              <p>All service providers and laborers are verified to ensure maximum trust and safety.</p>
             </div>
-            <h3>List Equipment</h3>
-            <p>Earn money renting out your idle tools</p>
+            <div className="feature-item feat-green">
+              <Clock size={48} color="#2E7D32" />
+              <h4>Save Time</h4>
+              <p>No more searching village to village. Find what you need with just a few taps.</p>
+            </div>
+            <div className="feature-item feat-gold">
+              <Coins size={48} color="#F57F17" />
+              <h4>Extra Income</h4>
+              <p>List your idle farming tools or machinery and earn extra money directly.</p>
+            </div>
           </div>
         </div>
       </section>

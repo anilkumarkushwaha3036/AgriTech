@@ -8,9 +8,10 @@ const equipmentSchema = new mongoose.Schema({
     type: String, 
     required: true 
   },
-  pricePerDay: { type: Number, required: true },
+  pricePerDay: { type: Number },
+  pricePerHour: { type: Number },
   images: [{ type: String }], // Array of image URLs
-  isAvailable: { type: Boolean, default: true },
+  status: { type: String, enum: ['Available', 'Working', 'Not Active'], default: 'Available' },
   specifications: { type: Map, of: String }
 }, { timestamps: true });
 

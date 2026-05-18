@@ -16,9 +16,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (phone, password) => {
     try {
-      const { data } = await axios.post('/api/auth/login', { email, password });
+      const { data } = await axios.post('/api/auth/login', { phone, password });
       setUser(data);
       localStorage.setItem('kisanSewaUser', JSON.stringify(data));
       return { success: true };
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, setUser, login, register, logout, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );

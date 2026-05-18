@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import '../assets/scss/layout/_auth.scss';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   
@@ -15,13 +15,13 @@ const Login = () => {
     e.preventDefault();
     setError('');
     
-    if(!email || !password) {
+    if(!phone || !password) {
       return setError('Please fill in all fields');
     }
 
-    const res = await login(email, password);
+    const res = await login(phone, password);
     if (res.success) {
-      navigate('/');
+      navigate('/dashboard');
     } else {
       setError(res.message);
     }
@@ -37,12 +37,12 @@ const Login = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Email Address</label>
+            <label>Mobile Number</label>
             <input 
-              type="email" 
-              placeholder="farmer@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text" 
+              placeholder="+91 9876543210"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           

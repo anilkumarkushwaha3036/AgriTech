@@ -1,20 +1,39 @@
 @import '../abstract/variables';
 
 .marketplace-page {
-  padding: 2rem 1rem;
-  
-  .marketplace-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-    
-    h1 {
-      color: $color-primary;
-    }
+  padding: 3rem 1rem 3rem 1rem !important;
+
+  /* Skeleton Animation */
+  @keyframes shimmer {
+    0% { background-position: -468px 0; }
+    100% { background-position: 468px 0; }
   }
+
+  .skeleton {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 1000px 100%; 
+    animation: shimmer 1.5s linear infinite forwards;
+    border-radius: 4px;
+  }
+
+  .skeleton-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #E5E7EB;
+
+    .skeleton-img { height: 200px; width: 100%; border-radius: 12px 12px 0 0; }
+    .skeleton-content { padding: 1.5rem; }
+    .skeleton-title { height: 24px; width: 60%; margin-bottom: 0.5rem; }
+    .skeleton-price { height: 20px; width: 40%; margin-bottom: 1rem; }
+    .skeleton-owner { height: 16px; width: 50%; margin-bottom: 1rem; }
+    .skeleton-btn { height: 40px; width: 100%; border-radius: 8px; }
+  }
+
+
 
   .equipment-grid {
     display: grid;
@@ -94,6 +113,99 @@
       }
 
       .btn-primary {
+        width: 100%;
+      }
+    }
+  }
+
+  /* Laborer Profile Card Style */
+  .laborer-card {
+    background: white;
+    border-radius: $border-radius-lg;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid $color-border;
+    transition: $transition-fast;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(46,125,50,0.08);
+      border-color: rgba(46,125,50,0.2);
+    }
+
+    .laborer-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid #F3F4F6;
+      padding-bottom: 1rem;
+
+      .laborer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, $color-primary 0%, darken($color-primary, 15%) 100%);
+        color: white;
+        font-weight: 700;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(46,125,50,0.2);
+      }
+
+      .laborer-title-area {
+        h3 {
+          font-size: 1.2rem;
+          color: $color-text-dark;
+          margin-bottom: 0.25rem;
+        }
+
+        .category-badge {
+          background-color: rgba(46,125,50,0.1);
+          color: $color-primary;
+          font-size: 0.75rem;
+          font-weight: 600;
+          padding: 0.2rem 0.5rem;
+          border-radius: 50px;
+          display: inline-block;
+        }
+      }
+    }
+
+    .laborer-content {
+      .price-tag {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+
+        .label {
+          color: $color-text-light;
+          font-size: 0.9rem;
+        }
+
+        .value {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: $color-secondary;
+        }
+      }
+
+      .location-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $color-text-dark;
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .book-btn {
         width: 100%;
       }
     }

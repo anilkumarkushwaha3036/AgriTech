@@ -3,10 +3,9 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String, required: true },
+  phone: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['farmer', 'laborer'], default: 'farmer' }, // Unified role
+  role: { type: String, enum: ['farmer', 'service_provider', 'laborer'], default: 'farmer' }, 
   location: {
     address: String,
     city: String,
@@ -16,11 +15,13 @@ const userSchema = new mongoose.Schema({
   // Laborer specific fields (can be left null if farmer)
   skills: [{ type: String }],
   dailyWage: { type: Number },
+  isAvailable: { type: Boolean, default: true },
+  avatar: { type: String, default: 'default' }
 }, { timestamps: true });
 
 // Password hash middleware
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre('save', async function() {
+  if (!this.isModified('password')) return;
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
